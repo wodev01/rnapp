@@ -1,8 +1,9 @@
-var express = require("express");
-var app = express(),
-    expressValidator = require('express-validator');
-var bodyParser = require("body-parser");
-var router = express.Router();
+var express = require("express"),
+    path     = require('path'),
+    app = express(),
+    expressValidator = require('express-validator'),
+    bodyParser = require("body-parser"),
+    router = express.Router();
 
 //CORS middleware
 var allowCrossDomain = function(req, res, next) {
@@ -19,5 +20,6 @@ app.use(allowCrossDomain);
 require('./routers/user')(app);
 require('./config');
 
-app.listen(3000);
+app.set('port', (process.env.PORT || 3000));
+app.listen(app.get('port'));
 console.log("Listening to PORT 3000");
